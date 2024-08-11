@@ -3,7 +3,7 @@ import { Howl } from "howler";
 import { useDrag, useDrop } from "react-dnd";
 import update from "immutability-helper";
 
-const NewMusicPlayer = ({ currentTrack, setCurrentTrack }) => {
+const NewMusicPlayer = ({ currentTrack, setCurrentTrack, currentSound, setCurrentSound }) => {
   const tracks = [
     { id: 1, title: "Billie Jean", artist: "Michael Jackson", album: "Thriller 25 Super...", time: "4:53", playing: 1040811084, src: "/path/to/billie-jean.mp3" },
     { id: 2, title: "Beat It", artist: "Michael Jackson", album: "Thriller 25 Super...", time: "4:18", playing: 643786045, src: "/music/beat-it.mp3" },
@@ -15,12 +15,19 @@ const NewMusicPlayer = ({ currentTrack, setCurrentTrack }) => {
   const [trackList, setTrackList] = useState(tracks);
 
   const playTrack = (track) => {
+    // Stop the current track if one is playing
+    if (currentSound) {
+      currentSound.stop();
+    }
+
+    // Set the new current track
     setCurrentTrack(track);
     const sound = new Howl({
       src: [track.src],
       html5: true,
       onend: () => setCurrentTrack(null)
     });
+    setCurrentSound(sound); // Store the current Howl instance
     sound.play();
   };
 
