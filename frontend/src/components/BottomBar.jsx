@@ -21,7 +21,7 @@ const BottomBar = ({ currentTrack, setCurrentSound, setCurrentTrack, currentSoun
   };
 
   return (
-   <div className="fixed bottom-0 w-full  p-4 flex justify-between items-center text-white lg:hidden border-t border-custom-red z-50"> 
+   <div className="fixed bottom-0 w-full  p-4 flex justify-between items-center text-white lg:hidden border-t border-custom-red z-40"> 
       {currentTrack ? (
         <>
           <div className="flex items-center">
